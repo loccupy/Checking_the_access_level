@@ -25,7 +25,7 @@ class GXDLMSReader(GXDLMSDisconnectControl):
         # pylint: disable=too-many-arguments
         self.replyBuff = bytearray(8 + 1024)
         self.waitTime = 1000
-        self.logFile = open("../logFile.txt", "w")
+        # self.logFile = open("../logFile.txt", "w")
         self.trace = trace
         self.media = media
         self.invocationCounter = invocationCounter

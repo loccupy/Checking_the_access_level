@@ -1,7 +1,6 @@
 from gurux_dlms.enums import ObjectType
 from gurux_dlms.objects import GXDLMSAssociationLogicalName, GXDLMSObjectCollection, GXDLMSData
 
-from libs.check_attr_and_meth import *
 from libs.checking import *
 from libs.conftest import connect_with_access_reader
 from libs.utils import merge_all_dicts, arr_obg_register_1ph, arr_obj_data_for_1ph, arr_obg_register_3ph, \

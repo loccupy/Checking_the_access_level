@@ -1,4 +1,5 @@
 # from gurux_dlms.enums import AccessMode, MethodAccessMode
+from gurux_dlms.enums import AccessMode, MethodAccessMode
 
 
 def merge_all_dicts_TT():
