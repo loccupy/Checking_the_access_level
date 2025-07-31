@@ -1,5 +1,6 @@
-# from gurux.dlms.enums import ObjectType, AccessMode, MethodAccessMode
-# from tests.tests_for_access_level_reader.utils import check_access_level_for_attribute, check_access_level_for_method
+from gurux_dlms.enums import ObjectType
+
+from libs.utils import *
 
 
 def check_data_atr_and_meth(data_objects, logical_name):

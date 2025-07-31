@@ -1,4 +1,3 @@
-from gurux_dlms.enums import ObjectType
 from gurux_dlms.objects import GXDLMSAssociationLogicalName, GXDLMSObjectCollection, GXDLMSData
 
 from libs.checking import *
@@ -7,7 +6,7 @@ from libs.utils import merge_all_dicts, arr_obg_register_1ph, arr_obj_data_for_1
     arr_obg_register_TT, arr_obj_data_for_3ph, arr_obj_data_for_TT
 
 
-def test_debug():
+def debug():
     reader, settings = connect_with_access_reader()
     settings.media.open()
     reader.initializeConnection()
@@ -140,7 +139,7 @@ def test_debug():
     print('_____________________________________________________________________________')
 
 
-def test_spodes():
+def spodes():
     reader, settings = connect_with_access_reader()
     settings.media.open()
     reader.initializeConnection()
@@ -250,88 +249,3 @@ def test_spodes():
 
     print(f'ПРОВЕРКА счетчика №{serial_number} ЗАКОНЧЕНА')
     print('_____________________________________________________________________________')
-
-
-# def test_3ph():
-#     reader, settings = connect_with_access_reader()
-#     settings.media.open()
-#     reader.initializeConnection()
-#
-#     object_list = reader.read(GXDLMSAssociationLogicalName('0.0.40.0.0.255'), 2)
-#
-#     print("\nПроверка Clock...")
-#     clock_objects = object_list.getObjects(ObjectType.CLOCK)
-#     check_clock(clock_objects)
-#
-#     print("\nПроверка Registers...")
-#     register_objects = object_list.getObjects(ObjectType.REGISTER)
-#     check_registers(register_objects, arr_obg_register_3ph)
-#
-#     print("\nПроверка Data...")
-#     data_objects = object_list.getObjects(ObjectType.DATA)
-#     check_data(data_objects, arr_obj_data_for_3ph)
-#
-#     print("\nПроверка Demand Register...")
-#     demand_register_objects = object_list.getObjects(ObjectType.DEMAND_REGISTER)
-#     check_demand_register(demand_register_objects)
-#
-#     print("\nПроверка Profile Generic...")
-#     profile_generic_objects = object_list.getObjects(ObjectType.PROFILE_GENERIC)
-#     check_profile_generic(profile_generic_objects)
-#
-#     print("\nПроверка SCRIPT_TABLE...")
-#     script_table_objects = object_list.getObjects(ObjectType.SCRIPT_TABLE)
-#     check_script_table(script_table_objects)
-#
-#     print("\nПроверка SPECIAL_DAYS_TABLE...")
-#     special_days_table_objects = object_list.getObjects(ObjectType.SPECIAL_DAYS_TABLE)
-#     check_special_days_table(special_days_table_objects)
-#
-#     print("\nПроверка ASSOCIATION_LOGICAL_NAME...")
-#     association_logical_name_objects = object_list.getObjects(ObjectType.ASSOCIATION_LOGICAL_NAME)
-#     check_association_logical_name(association_logical_name_objects)
-#
-#     # Не обязательный (его и нет у нас)
-#     # print("\nПроверка SAP_ASSIGNMENT...")
-#     # sap_assignment_objects = object_list.getObjects(ObjectType.SAP_ASSIGNMENT)
-#     # check_sap_assignment(sap_assignment_objects)
-#
-#     # 'Не обязателен при использовании прямого IEC HDLC' (его и нет у нас)
-#     # print("\nПроверка IEC_LOCAL_PORT_SETUP...")
-#     # iec_local_port_setup_objects = object_list.getObjects(ObjectType.IEC_LOCAL_PORT_SETUP)
-#     # check_iec_local_port_setup(iec_local_port_setup_objects)
-#
-#     print("\nПроверка ACTIVITY_CALENDAR...")
-#     activity_calendar_objects = object_list.getObjects(ObjectType.ACTIVITY_CALENDAR)
-#     check_activity_calendar(activity_calendar_objects)
-#
-#     print("\nПроверка ACTION_SCHEDULE...")
-#     action_schedule_objects = object_list.getObjects(ObjectType.ACTION_SCHEDULE)
-#     check_action_schedule(action_schedule_objects)
-#
-#     # iec_hdlc_setup
-#     print("\nПроверка IEC_HDLC_SETUP...")
-#     iec_hdlc_setup_objects = object_list.getObjects(ObjectType.IEC_HDLC_SETUP)
-#     check_iec_hdlc_setup(iec_hdlc_setup_objects)
-#
-#     # push_setup
-#     print("\nПроверка PUSH_SETUP...")
-#     push_setup_objects = object_list.getObjects(ObjectType.PUSH_SETUP)
-#     check_push_setup(push_setup_objects)
-#
-#     # security_setup нет в считывателе
-#     # print("\nПроверка SECURITY_SETUP...")
-#     # security_setup_objects = object_list.getObjects(ObjectType.SECURITY_SETUP)
-#     # check_security_setup(security_setup_objects)
-#
-#     # disconnect_control
-#     print("\nПроверка DISCONNECT_CONTROL...")
-#     disconnect_control_objects = object_list.getObjects(ObjectType.DISCONNECT_CONTROL)
-#     check_disconnect_control(disconnect_control_objects)
-#
-#     # limiter
-#     print("\nПроверка LIMITER...")
-#     limiter_objects = object_list.getObjects(ObjectType.LIMITER)
-#     check_limiter(limiter_objects)
-#
-#     reader.close()
