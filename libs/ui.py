@@ -96,15 +96,15 @@ class FileUploader(QWidget):
             self.file_name = 'data.txt'
             # f"\n<font color={color} size='5'>{message}</font>\n"
             with open(self.file_name, 'w', encoding='utf-8') as file:
-                file.write("Проверка на соответствие СПОДЭС")
+                file.write("Проверка на соответствие СПОДЭС\n")
 
-            self.update_text("Проверка на соответствие СПОДЭС\n", 'yellow')
+            self.update_text("Проверка на соответствие СПОДЭС", 'yellow')
             spodes()
 
             with open(self.file_name, 'a', encoding='utf-8') as file:
                 file.write("Проверка остальных объектов\n")
 
-            self.update_text("Проверка остальных объектов\n", 'yellow')
+            self.update_text("Проверка остальных объектов", 'yellow')
             debug()
 
         except Exception as e:
