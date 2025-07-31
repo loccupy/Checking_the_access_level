@@ -1,3 +1,4 @@
+import datetime
 import os
 import sys
 
@@ -7,7 +8,7 @@ from PyQt5.QtGui import QIntValidator, QTextCursor
 from PyQt5.QtWidgets import QWidget, QLineEdit, QPushButton, QTextEdit, QMessageBox, QApplication
 
 from libs import connect
-from libs.test_with_association import spodes, debug
+from libs.test_with_association import spodes, debug, get_the_counter_characteristics
 
 
 class EmittingStream(QObject):
@@ -23,6 +24,7 @@ class EmittingStream(QObject):
 class FileUploader(QWidget):
     def __init__(self):
         super().__init__()
+        self.file_name = None
         self.initUI()
 
     def initUI(self):
@@ -52,7 +54,6 @@ class FileUploader(QWidget):
 
     def check_fields(self):
         if not self.number_com.text().strip():
-            # Показываем предупреждение
             QMessageBox.warning(
                 self,
                 "Предупреждение",
@@ -61,7 +62,6 @@ class FileUploader(QWidget):
             )
             return False
         if not self.serial.text().strip():
-            # Показываем предупреждение
             QMessageBox.warning(
                 self,
                 "Предупреждение",
@@ -70,7 +70,6 @@ class FileUploader(QWidget):
             )
             return False
         if not self.speed.text().strip():
-            # Показываем предупреждение
             QMessageBox.warning(
                 self,
                 "Предупреждение",
@@ -93,36 +92,27 @@ class FileUploader(QWidget):
 
             self.get_settings()
 
-            self.file_name = 'data.txt'
-            # f"\n<font color={color} size='5'>{message}</font>\n"
+            device_type, serial_number, proshivka = get_the_counter_characteristics()
+
+            current_time = datetime.datetime.now().strftime("%d-%m-%y_%H-%M-%S")
+
+            self.file_name = f'Results of checking meter_[№{serial_number}] type_[{device_type}]_[{current_time}].txt'
+
             with open(self.file_name, 'w', encoding='utf-8') as file:
                 file.write("Проверка на соответствие СПОДЭС\n")
 
             self.update_text("Проверка на соответствие СПОДЭС", 'yellow')
-            spodes()
+            spodes(device_type, serial_number, proshivka)
 
             with open(self.file_name, 'a', encoding='utf-8') as file:
-                file.write("Проверка остальных объектов\n")
+                file.write("\nПроверка остальных объектов\n")
 
             self.update_text("Проверка остальных объектов", 'yellow')
-            debug()
+            debug(device_type, serial_number, proshivka)
 
         except Exception as e:
             print(e)
-
-
-        #
-        # com = self.number_com.text()
-        # try:
-        #     instrument, meter_type = config(com)
-        #     instrument.write_register(registeraddress=147, value=170)
-        #     self.update_text("УСПЕХ!", "green")
-        #     print()
-        #     self.update_text("Перезапустите счетчик!", "green")
-        # except Exception as e:
-        #     self.update_text(f"Ошибка {e}.", "red")
-        #     print()
-        #     self.update_text(f"Проверьте настройки.", "red")
+            return
 
     def applyDarkTheme(self):
         # Определяем стили для темной темы
@@ -176,8 +166,9 @@ class FileUploader(QWidget):
         cursor = self.text_edit.textCursor()
         cursor.movePosition(QTextCursor.End)
         cursor.insertText(text)
-        with open(self.file_name, 'a', encoding='utf-8') as file:
-            file.write(text)
+        if self.file_name:
+            with open(self.file_name, 'a', encoding='utf-8') as file:
+                file.write(text)
         self.text_edit.setTextCursor(cursor)
         self.text_edit.ensureCursorVisible()
         QApplication.processEvents()

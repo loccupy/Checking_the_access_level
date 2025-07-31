@@ -89,6 +89,8 @@ def check_access_level_for_attribute(obj, attr_number, access_level):
         print(f'НЕ СООТВЕТСТВУЕТ УРОВЕНЬ (фактический - {AccessMode(obj.getAccess(attr_number)).name},'
               f' ожидается - {AccessMode(access_level).name})'
               f' ДОСТУПА АТРИБУТА №{attr_number} ОБЪЕКТА {obj.logicalName}!')
+    else:
+        print(f'УРОВЕНЬ ДОСТУПА АТРИБУТА №{attr_number} OK')
 
 
 def check_access_level_for_method(obj, meth_number, access_level):
@@ -96,6 +98,8 @@ def check_access_level_for_method(obj, meth_number, access_level):
         print(f'НЕ СООТВЕТСТВУЕТ УРОВЕНЬ (фактический - {MethodAccessMode(obj.getMethodAccess(meth_number)).name},'
               f' ожидается - {MethodAccessMode(access_level).name})'
               f' ДОСТУПА МЕТОДА №{meth_number} ОБЪЕКТА {obj.logicalName}!')
+    else:
+        print(f'УРОВЕНЬ ДОСТУПА МЕТОДА №{meth_number} OK')
 
 
 # Для 1ф
