@@ -1,7 +1,7 @@
 from gurux_dlms.objects import GXDLMSAssociationLogicalName, GXDLMSObjectCollection, GXDLMSData
 
 from libs.checking import *
-from libs.conftest import connect_with_access_reader
+from libs.connect import connect_with_access_reader
 from libs.utils import merge_all_dicts, arr_obg_register_1ph, arr_obj_data_for_1ph, arr_obg_register_3ph, \
     arr_obg_register_TT, arr_obj_data_for_3ph, arr_obj_data_for_TT
 

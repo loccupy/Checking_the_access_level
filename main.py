@@ -1,4 +1,4 @@
-from libs.test_with_association import spodes
+from libs.ui import main
 
 if __name__ == '__main__':
-    spodes()
+    main()
